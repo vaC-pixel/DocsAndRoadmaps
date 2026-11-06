@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Master DSA Roadmap & Syllabus</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Font: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f6ff',
+              400: '#38bdf8',
+              500: '#06b6d4',
+              600: '#0284c7',
+              cyan: '#06b6d4',
+              violet: '#8b5cf6',
+              indigo: '#6366f1'
+            }
+          },
+          animation: {
+            'glow-pulse': 'glowPulse 4s ease-in-out infinite alternate',
+            'float': 'float 6s ease-in-out infinite',
+          },
+          keyframes: {
+            glowPulse: {
+              '0%': { opacity: '0.4', filter: 'blur(40px)' },
+              '100%': { opacity: '0.8', filter: 'blur(60px)' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #090d16;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Custom Glassmorphism Styles */
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+
+    .glass-card {
+      background: rgba(30, 41, 59, 0.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card:hover {
+      background: rgba(30, 41, 59, 0.7);
+      border-color: rgba(56, 189, 248, 0.3);
+      box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.15), 0 8px 10px -6px rgba(14, 165, 233, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .glass-nav {
+      background: rgba(9, 13, 22, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #38bdf8 0%, #8b5cf6 50%, #ec4899 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Scroll Reveal & Lazy Loading Classes */
+    .lazy-reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .lazy-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090d16;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+
+    /* Checkbox Styling */
+    .custom-checkbox {
+      appearance: none;
+      background-color: rgba(30, 41, 59, 0.8);
+      margin: 0;
+      font: inherit;
+      color: currentColor;
+      width: 1.25em;
+      height: 1.25em;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0.375em;
+      display: grid;
+      place-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .custom-checkbox::before {
+      content: "";
+      width: 0.65em;
+      height: 0.65em;
+      transform: scale(0);
+      transition: 120ms transform ease-in-out;
+      box-shadow: inset 1em 1em #38bdf8;
+      transform-origin: center;
+      clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    }
+
+    .custom-checkbox:checked {
+      border-color: #38bdf8;
+      background: rgba(14, 165, 233, 0.15);
+    }
+
+    .custom-checkbox:checked::before {
+      transform: scale(1);
+    }
+
+    .topic-completed {
+      opacity: 0.6;
+    }
+    .topic-completed .topic-title {
+      text-decoration: line-through;
+      color: #94a3b8;
+    }
+
+    /* Tooltip Toast */
+    #toast {
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col relative selection:bg-cyan-500/30 selection:text-cyan-200">
+
+  <!-- Background Decorative Glowing Orbs -->
+  <div class="fixed top-0 left-1/4 w-[500px] h-[500px] bg-cyan-600/20 rounded-full animate-glow-pulse pointer-events-none -z-10"></div>
+  <div class="fixed bottom-1/3 right-1/4 w-[600px] h-[600px] bg-violet-600/15 rounded-full animate-glow-pulse pointer-events-none -z-10" style="animation-delay: 2s;"></div>
+  <div class="fixed top-2/3 left-1/3 w-[400px] h-[400px] bg-indigo-600/15 rounded-full animate-glow-pulse pointer-events-none -z-10" style="animation-delay: 1s;"></div>
+
+  <!-- Sticky Header / Navbar -->
+  <header class="sticky top-0 z-50 glass-nav">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col md:flex-row items-center justify-between gap-4">
+      
+      <!-- Logo & Title -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-violet-600 flex items-center justify-center shadow-lg shadow-cyan-500/20 text-white font-bold text-xl">
+          <i class="fa-solid font-mono text-sm">DSA</i>
+        </div>
+        <div>
+          <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
+            Data Structures & Algorithms
+            <span class="text-xs px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">2026 Master Edition</span>
+          </h1>
+          <p class="text-xs text-slate-400">Step-by-step Interactive Syllabus & Pattern Guide</p>
+        </div>
+      </div>
+
+      <!-- Controls: Search & Difficulty Filter -->
+      <div class="flex items-center gap-3 w-full md:w-auto">
+        <div class="relative flex-1 md:w-72">
+          <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+          <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Search topic, algo, or pattern..." 
+            class="w-full bg-slate-900/60 border border-slate-700/60 rounded-xl pl-9 pr-4 py-2 text-sm text-slate-200 placeholder-slate-400 focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/60 transition-all"
+            onkeyup="filterTopics()"
+          />
+        </div>
+        <select id="difficultyFilter" onchange="filterTopics()" class="bg-slate-900/60 border border-slate-700/60 rounded-xl px-3 py-2 text-sm text-slate-300 focus:outline-none focus:border-cyan-500/60 cursor-pointer">
+          <option value="ALL">All Levels</option>
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </select>
+      </div>
+
+    </div>
+
+    <!-- Progress Indicator Bar -->
+    <div class="w-full bg-slate-800/40 h-1.5 overflow-hidden">
+      <div id="progressBar" class="bg-gradient-to-r from-cyan-500 via-indigo-500 to-violet-500 h-full transition-all duration-500 w-0"></div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    
+    <!-- Hero Header Banner -->
+    <div class="glass-panel rounded-2xl p-6 sm:p-8 mb-8 relative overflow-hidden border border-white/10 lazy-reveal">
+      <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div class="max-w-2xl">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-semibold uppercase tracking-wider mb-3">
+            <i class="fa-solid fa-rocket"></i> Complete Roadmap
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-3">
+            Master Data Structures <br class="hidden sm:inline" /> & <span class="gradient-text">Algorithm Patterns</span>
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            A structured, 10-module blueprint covering foundational concepts to advanced graph algorithms and dynamic programming. Track your progress, study core algorithmic patterns, and prepare for top coding interviews.
+          </p>
+        </div>
+
+        <!-- Progress Overview Widget -->
+        <div class="glass-card rounded-xl p-5 border border-white/10 min-w-[260px] flex flex-col justify-center items-center text-center">
+          <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Roadmap Progress</span>
+          <div class="text-4xl font-black text-white font-mono my-1 flex items-baseline gap-1">
+            <span id="completedCount" class="text-cyan-400">0</span>
+            <span class="text-slate-500 text-2xl">/</span>
+            <span id="totalCount" class="text-slate-400 text-2xl">0</span>
+          </div>
+          <p id="percentText" class="text-xs font-semibold text-violet-400 mb-3">0% Completed</p>
+          <button onclick="resetProgress()" class="text-xs text-slate-400 hover:text-rose-400 transition-colors flex items-center gap-1.5 bg-slate-800/60 px-3 py-1.5 rounded-lg border border-slate-700/50">
+            <i class="fa-solid fa-rotate-right"></i> Reset Progress
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Navigation Pills -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-6 scrollbar-none text-xs sm:text-sm lazy-reveal">
+      <span class="text-slate-400 whitespace-nowrap font-semibold"><i class="fa-solid fa-compass me-1"></i> Modules:</span>
+      <button onclick="scrollToModule('mod-1')" class="px-3 py-1.5 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-300 hover:border-cyan-500/50 hover:text-cyan-300 transition-all whitespace-nowrap">1. Basics</button>
+      <button onclick="scrollToModule('mod-2')" class="px-3 py-1.5 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-300 hover:border-cyan-500/50 hover:text-cyan-300 transition-all whitespace-nowrap">2. Arrays & Hashing</button>
+      <button onclick="scrollToModule('mod-3')" class="px-3 py-1.5 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-300 hover:border-cyan-500/50 hover:text-cyan-300 transition-all whitespace-nowrap">3. Two Pointers</button>
+      <button onclick="scrollToModule('mod-4')" class="px-3 py-1.5 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-300 hover:border-cyan-500/50 hover:text-cyan-300 transition-all whitespace-nowrap">4. Stacks & Queues</button>
+      <button onclick="scrollToModule('mod-5')" class="px-3 py-1.5 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-300 hover:border-cyan-500/50 hover:text-cyan-300 transition-all whitespace-nowrap">5. Linked Lists</button>
+      <button onclick="scrollToModule('mod-6')" class="px-3 py-1.5 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-300 hover:border-cyan-500/50 hover:text-cyan-300 transition-all whitespace-nowrap">6. Binary Search</button>
+      <button onclick="scrollToModule('mod-7')" class="px-3 py-1.5 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-300 hover:border-cyan-500/50 hover:text-cyan-300 transition-all whitespace-nowrap">7. Trees</button>
+      <button onclick="scrollToModule('mod-8')" class="px-3 py-1.5 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-300 hover:border-cyan-500/50 hover:text-cyan-300 transition-all whitespace-nowrap">8. Heaps</button>
+      <button onclick="scrollToModule('mod-9')" class="px-3 py-1.5 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-300 hover:border-cyan-500/50 hover:text-cyan-300 transition-all whitespace-nowrap">9. Backtracking & DP</button>
+      <button onclick="scrollToModule('mod-10')" class="px-3 py-1.5 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-300 hover:border-cyan-500/50 hover:text-cyan-300 transition-all whitespace-nowrap">10. Graphs</button>
+    </div>
+
+    <!-- Syllabus Modules Container -->
+    <div id="syllabusContainer" class="space-y-6">
+      <!-- Generated via JS for maximum clean data structuring -->
+    </div>
+
+  </main>
+
+  <!-- Glassmorphism Footer -->
+  <footer class="mt-16 border-t border-white/10 glass-nav relative z-10 lazy-reveal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        
+        <!-- Brand Info -->
+        <div class="text-center md:text-left">
+          <div class="flex items-center justify-center md:justify-start gap-2.5 mb-2">
+            <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-cyan-500 to-violet-600 flex items-center justify-center text-white text-xs font-bold font-mono">
+              DSA
+            </div>
+            <span class="text-lg font-bold text-white tracking-wide">DSA Mastery Hub</span>
+          </div>
+          <p class="text-xs text-slate-400 max-w-sm">
+            Interactive Data Structures & Algorithms learning curriculum designed for developers, interview preparation, and computer science students.
+          </p>
+        </div>
+
+        <!-- Social Media Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-2.5">
+          <a href="#" target="_blank" rel="noopener font-medium" class="glass-card px-3.5 py-2 rounded-xl text-xs text-slate-300 hover:text-cyan-400 hover:border-cyan-500/40 flex items-center gap-2 transition-all">
+            <i class="fa-brands fa-github text-sm"></i> GitHub
+          </a>
+          <a href="#" target="_blank" rel="noopener font-medium" class="glass-card px-3.5 py-2 rounded-xl text-xs text-slate-300 hover:text-cyan-400 hover:border-cyan-500/40 flex items-center gap-2 transition-all">
+            <i class="fa-brands fa-linkedin text-sm"></i> LinkedIn
+          </a>
+          <a href="#" target="_blank" rel="noopener font-medium" class="glass-card px-3.5 py-2 rounded-xl text-xs text-slate-300 hover:text-cyan-400 hover:border-cyan-500/40 flex items-center gap-2 transition-all">
+            <i class="fa-brands fa-x-twitter text-sm"></i> X (Twitter)
+          </a>
+          <a href="#" target="_blank" rel="noopener font-medium" class="glass-card px-3.5 py-2 rounded-xl text-xs text-slate-300 hover:text-cyan-400 hover:border-cyan-500/40 flex items-center gap-2 transition-all">
+            <i class="fa-code text-cyan-400 text-sm"></i> LeetCode
+          </a>
+          <a href="#" target="_blank" rel="noopener font-medium" class="glass-card px-3.5 py-2 rounded-xl text-xs text-slate-300 hover:text-rose-400 hover:border-rose-500/40 flex items-center gap-2 transition-all">
+            <i class="fa-brands fa-youtube text-sm"></i> YouTube
+          </a>
+          <button onclick="copyEmail()" class="glass-card px-3.5 py-2 rounded-xl text-xs text-slate-300 hover:text-violet-400 hover:border-violet-500/40 flex items-center gap-2 transition-all">
+            <i class="fa-regular fa-envelope text-sm"></i> Copy Email
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="mt-8 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+        <p>© 2026 DSA Roadmap. Free community learning resource.</p>
+        <div class="flex items-center gap-4">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px]">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+            Updated for 2026 Curriculum
+          </span>
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="hover:text-cyan-400 transition-colors flex items-center gap-1">
+            Back to top <i class="fa-solid fa-arrow-up text-[10px]"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Toast Notification Box -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none glass-panel px-4 py-3 rounded-xl border border-cyan-500/40 text-cyan-200 text-sm shadow-xl flex items-center gap-2">
+    <i class="fa-solid fa-circle-check text-cyan-400"></i>
+    <span id="toastMessage">Email copied to clipboard!</span>
+  </div>
+
+  <!-- JavaScript Logic -->
+  <script>
+    // Complete Comprehensive DSA Syllabus Dataset
+    const dsaSyllabus = [
+      {
+        id: "mod-1",
+        title: "Module 1: Foundations & Time-Space Complexity",
+        description: "Language fundamentals, Big-O notation, recursion basics, and memory layout.",
+        topics: [
+          { id: "m1-1", title: "Asymptotic Analysis (Big-O, Big-Ω, Big-Θ)", diff: "Easy", time: "O(1) to O(N!)", desc: "Understanding upper, lower, and tight complexity bounds." },
+          { id: "m1-2", title: "Space Complexity & Auxiliary Memory", diff: "Easy", time: "O(1) vs O(N)", desc: "Analyzing call stack space and heap allocation." },
+          { id: "m1-3", title: "Recursion Mechanics & Stack Frames", diff: "Medium", time: "O(2^N) / O(N)", desc: "Base conditions, recurrence relations, and call stack visualization." },
+          { id: "m1-4", title: "Basic Math & Number Theory", diff: "Easy", time: "O(log N)", desc: "GCD (Euclidean), Primality Test (Sieve of Eratosthenes), Modular Arithmetic." }
+        ]
+      },
+      {
+        id: "mod-2",
+        title: "Module 2: Arrays & Dynamic Hashing Patterns",
+        description: "Contiguous memory structures, HashMaps, Frequency Counting, and Prefix Arrays.",
+        topics: [
+          { id: "m2-1", title: "Static vs Dynamic Array Allocation", diff: "Easy", time: "Amortized O(1)", desc: "Resizing strategies, memory layout, and contiguous cache benefits." },
+          { id: "m2-2", title: "Hash Map & Set Implementation", diff: "Easy", time: "O(1) avg", desc: "Handling collisions via Chaining & Open Addressing." },
+          { id: "m2-3", title: "Prefix Sum & Range Query Technique", diff: "Easy", time: "O(1) Query", desc: "Precomputing array balances to solve range query problems instantly." },
+          { id: "m2-4", title: "Kadane's Algorithm (Max Subarray)", diff: "Medium", time: "O(N)", desc: "Dynamic subarray optimization with local vs global max tracking." },
+          { id: "m2-5", title: "Group Anagrams & Frequency Keys", diff: "Medium", time: "O(N * K)", desc: "Hashing structural invariants using character counts or sorted signatures." }
+        ]
+      },
+      {
+        id: "mod-3",
+        title: "Module 3: Two Pointers & Sliding Window Patterns",
+        description: "Optimizing search spaces and window boundaries on linear data structures.",
+        topics: [
+          { id: "m3-1", title: "Two Pointers: Converging & Fast/Slow", diff: "Easy", time: "O(N)", desc: "Opposite end pointers for sorted arrays, cycle detection, and partition." },
+          { id: "m3-2", title: "Fixed-Size Sliding Window", diff: "Easy", time: "O(N)", desc: "Maintaining running sums or hash tables over a fixed subarray size." },
+          { id: "m3-3", title: "Variable-Size Sliding Window", diff: "Medium", time: "O(N)", desc: "Dynamic expansion and contraction based on constraint satisfaction." },
+          { id: "m3-4", title: "Trapping Rain Water Pattern", diff: "Hard", time: "O(N)", desc: "Two pointer extreme bounding technique for elevation maps." }
+        ]
+      },
+      {
+        id: "mod-4",
+        title: "Module 4: Stacks & Queues (Linear LIFO / FIFO)",
+        description: "Abstract linear data types for expression parsing, evaluation, and monotonic states.",
+        topics: [
+          { id: "m4-1", title: "Stack Implementation & Parentheses Matching", diff: "Easy", time: "O(N)", desc: "Balanced string validation using Last-In-First-Out." },
+          { id: "m4-2", title: "Monotonic Stack Pattern", diff: "Medium", time: "O(N)", desc: "Next Greater Element and Daily Temperatures optimization." },
+          { id: "m4-3", title: "Queue & Circular Queue Buffer", diff: "Easy", time: "O(1)", desc: "First-In-First-Out buffers for streaming data and task scheduling." },
+          { id: "m4-4", title: "Monotonic Double-Ended Queue (Deque)", diff: "Hard", time: "O(N)", desc: "Sliding Window Maximum algorithm using deque invariants." }
+        ]
+      },
+      {
+        id: "mod-5",
+        title: "Module 5: Linked List Transformations",
+        description: "Pointers, node traversals, in-place reversals, and multi-pointer techniques.",
+        topics: [
+          { id: "m5-1", title: "Singly & Doubly Linked List Operations", diff: "Easy", time: "O(1) / O(N)", desc: "Node insertions, deletions, and structural traversals." },
+          { id: "m5-2", title: "In-Place Iterative & Recursive Reversal", diff: "Easy", time: "O(N)", desc: "Pointer swapping without extra space utilization." },
+          { id: "m5-3", title: "Floyd's Cycle Detection (Tortoise & Hare)", diff: "Medium", time: "O(N)", desc: "Fast and slow pointers for detecting cycles and finding loop entry." },
+          { id: "m5-4", title: "LRU (Least Recently Used) Cache Design", diff: "Hard", time: "O(1) all ops", desc: "Combining HashMap with Doubly Linked List for O(1) eviction." }
+        ]
+      },
+      {
+        id: "mod-6",
+        title: "Module 6: Binary Search & Bit Manipulation",
+        description: "Logarithmic space reduction algorithms and low-level bitwise operations.",
+        topics: [
+          { id: "m6-1", title: "Binary Search on Sorted Arrays", diff: "Easy", time: "O(log N)", desc: "Lower bound, upper bound, and boundary condition elimination." },
+          { id: "m6-2", title: "Binary Search on Answer Range", diff: "Medium", time: "O(N log M)", desc: "Monotonic search space optimization for allocation problems." },
+          { id: "m6-3", title: "Search in Rotated Sorted Array", diff: "Medium", time: "O(log N)", desc: "Determining sorted half properties in shifted arrays." },
+          { id: "m6-4", title: "Bitwise Operators & Bitmasking", diff: "Medium", time: "O(1)", desc: "AND, OR, XOR tricks, single number, subset generation via masks." }
+        ]
+      },
+      {
+        id: "mod-7",
+        title: "Module 7: Binary Trees & Binary Search Trees (BST)",
+        description: "Hierarchical data representation, traversals, structural invariants, and search.",
+        topics: [
+          { id: "m7-1", title: "Tree Traversals (Pre/In/Post Order, BFS Level Order)", diff: "Easy", time: "O(N)", desc: "DFS stack recursion vs BFS queue level traversals." },
+          { id: "m7-2", title: "Height, Diameter & Balanced Trees", diff: "Easy", time: "O(N)", desc: "Depth calculation and AVL balance factor conditions." },
+          { id: "m7-3", title: "Binary Search Tree (BST) Validation & Search", diff: "Medium", time: "O(H)", desc: "BST properties (Left < Root < Right) and range queries." },
+          { id: "m7-4", title: "Lowest Common Ancestor (LCA)", diff: "Medium", time: "O(N)", desc: "Recursive path intersection in Binary Trees and BSTs." },
+          { id: "m7-5", title: "Serialize and Deserialize Binary Tree", diff: "Hard", time: "O(N)", desc: "Converting tree structures into string streams and back." }
+        ]
+      },
+      {
+        id: "mod-8",
+        title: "Module 8: Heaps & Priority Queues",
+        description: "Binary Heap structures, dynamic priority sorting, and top-K elements.",
+        topics: [
+          { id: "m8-1", title: "Min-Heap / Max-Heap Operations", diff: "Easy", time: "O(log N)", desc: "Heapify, bubble up, bubble down, and HeapSort." },
+          { id: "m8-2", title: "Top K Frequent / Kth Largest Element", diff: "Medium", time: "O(N log K)", desc: "Maintaining a size-K min/max heap for streaming rank analysis." },
+          { id: "m8-3", title: "Merge K Sorted Lists", diff: "Hard", time: "O(N log K)", desc: "Priority queue pointer consolidation across multiple sorted streams." },
+          { id: "m8-4", title: "Find Median from Data Stream", diff: "Hard", time: "O(log N) add", desc: "Dual heap balancing technique (Max-Heap + Min-Heap)." }
+        ]
+      },
+      {
+        id: "mod-9",
+        title: "Module 9: Backtracking & Dynamic Programming (DP)",
+        description: "Exhaustive state-space search, memoization, and optimal substructure optimization.",
+        topics: [
+          { id: "m9-1", title: "Backtracking: Subsets, Permutations & Combinations", diff: "Medium", time: "O(2^N) / O(N!)", desc: "State-space tree exploration with pruning and backtracking." },
+          { id: "m9-2", title: "N-Queens & Sudoku Solver", diff: "Hard", time: "O(N!)", desc: "Constraint satisfaction problems using recursive pruning." },
+          { id: "m9-3", title: "1D DP: Fibonacci, Climbing Stairs, House Robber", diff: "Easy", time: "O(N)", desc: "Overlapping subproblems and state transition tables." },
+          { id: "m9-4", title: "2D DP: Grid Paths & Knapsack Problem (0/1 & Unbounded)", diff: "Medium", time: "O(N * W)", desc: "State transitions across item weights and budget constraints." },
+          { id: "m9-5", title: "Longest Common Subsequence (LCS) & Edit Distance", diff: "Hard", time: "O(N * M)", desc: "String comparison dynamic programming and alignment." }
+        ]
+      },
+      {
+        id: "mod-10",
+        title: "Module 10: Graphs & Advanced Data Structures",
+        description: "Network models, connectivity, shortest paths, topological ordering, and Tries.",
+        topics: [
+          { id: "m10-1", title: "Graph Representations (Adjacency Matrix & List)", diff: "Easy", time: "O(V + E)", desc: "Vertices and edges data structure mapping." },
+          { id: "m10-2", title: "BFS (Shortest Path) & DFS (Connected Components)", diff: "Medium", time: "O(V + E)", desc: "Queue-based level exploration vs recursive stack traversals." },
+          { id: "m10-3", title: "Topological Sort & Kahn's Algorithm", diff: "Medium", time: "O(V + E)", desc: "Dependency ordering in Directed Acyclic Graphs (DAG)." },
+          { id: "m10-4", title: "Disjoint Set Union (DSU / Union-Find)", diff: "Medium", time: "O(α(N))", desc: "Path compression and rank optimization for connected components." },
+          { id: "m10-5", title: "Dijkstra's Algorithm (Weighted Shortest Path)", diff: "Hard", time: "O(E log V)", desc: "Greedy shortest path algorithm with priority queues." },
+          { id: "m10-6", title: "Trie (Prefix Tree) Data Structure", diff: "Medium", time: "O(L) per word", desc: "Efficient string search, autocomplete, and prefix matching." }
+        ]
+      }
+    ];
+
+    // Local Storage Progress State
+    let userProgress = JSON.parse(localStorage.getItem('dsa_progress_2026')) || {};
+
+    // IntersectionObserver for Scroll Reveal / Lazy Loading
+    let revealObserver;
+    function setupScrollObserver() {
+      const options = {
+        root: null,
+        rootMargin: '0px 0px -50px 0px',
+        threshold: 0.15
+      };
+
+      revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, options);
+
+      document.querySelectorAll('.lazy-reveal').forEach(el => revealObserver.observe(el));
+    }
+
+    // Render Modules & Topics
+    function renderSyllabus() {
+      const container = document.getElementById('syllabusContainer');
+      container.innerHTML = '';
+
+      let totalTopics = 0;
+      let checkedTopics = 0;
+
+      dsaSyllabus.forEach((module, modIdx) => {
+        const modCard = document.createElement('div');
+        modCard.id = module.id;
+        modCard.className = 'glass-panel rounded-2xl border border-white/10 overflow-hidden transition-all lazy-reveal';
+
+        // Check module completion status
+        const modCompletedCount = module.topics.filter(t => userProgress[t.id]).length;
+        const modTotalCount = module.topics.length;
+        const isAllModDone = modCompletedCount === modTotalCount && modTotalCount > 0;
+
+        totalTopics += modTotalCount;
+        checkedTopics += modCompletedCount;
+
+        // Header section of accordion module
+        modCard.innerHTML = `
+          <div onclick="toggleAccordion('${module.id}-body')" class="p-5 sm:p-6 cursor-pointer flex items-center justify-between gap-4 select-none hover:bg-white/[0.02] transition-colors">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center justify-center text-cyan-400 font-bold text-base shadow-inner">
+                ${modIdx + 1}
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-white flex items-center gap-3">
+                  ${module.title}
+                  ${isAllModDone ? '<span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"><i class="fa-solid fa-check me-1"></i>Completed</span>' : ''}
+                </h3>
+                <p class="text-xs text-slate-400 mt-0.5">${module.description}</p>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+              <span class="text-xs font-mono font-semibold px-3 py-1 rounded-full bg-slate-800/80 text-slate-300 border border-slate-700/60 hidden sm:inline-block">
+                ${modCompletedCount}/${modTotalCount}
+              </span>
+              <i id="${module.id}-icon" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+            </div>
+          </div>
+
+          <!-- Accordion Body -->
+          <div id="${module.id}-body" class="px-5 pb-6 pt-2 grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-white/5">
+            ${module.topics.map(topic => {
+              const isChecked = !!userProgress[topic.id];
+              const diffColor = topic.diff === 'Easy' ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' :
+                                topic.diff === 'Medium' ? 'text-amber-400 bg-amber-500/10 border-amber-500/20' :
+                                'text-rose-400 bg-rose-500/10 border-rose-500/20';
+
+              return `
+                <div class="topic-card glass-card p-4 rounded-xl flex flex-col justify-between gap-3 ${isChecked ? 'topic-completed' : ''}" data-title="${topic.title.toLowerCase()}" data-diff="${topic.diff}">
+                  <div class="flex items-start justify-between gap-3">
+                    <div class="flex items-start gap-3">
+                      <input 
+                        type="checkbox" 
+                        class="custom-checkbox mt-1" 
+                        id="chk-${topic.id}" 
+                        ${isChecked ? 'checked' : ''} 
+                        onchange="toggleTopic('${topic.id}')"
+                      />
+                      <div>
+                        <label for="chk-${topic.id}" class="topic-title font-semibold text-sm text-slate-200 cursor-pointer block leading-tight hover:text-cyan-300 transition-colors">
+                          ${topic.title}
+                        </label>
+                        <p class="text-xs text-slate-400 mt-1 leading-normal">${topic.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between pt-2 border-t border-white/5 text-xs">
+                    <span class="font-semibold px-2 py-0.5 rounded border ${diffColor}">
+                      ${topic.diff}
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] bg-slate-900/60 px-2 py-0.5 rounded border border-slate-800">
+                      <i class="fa-regular fa-clock me-1 text-slate-500"></i>${topic.time}
+                    </span>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+
+        container.appendChild(modCard);
+      });
+
+      updateProgressStats(checkedTopics, totalTopics);
+      setupScrollObserver();
+    }
+
+    // Toggle Checkbox Topic State
+    function toggleTopic(id) {
+      userProgress[id] = !userProgress[id];
+      localStorage.setItem('dsa_progress_2026', JSON.stringify(userProgress));
+      renderSyllabus();
+      filterTopics();
+    }
+
+    // Update Overall Stats and Progress Bar
+    function updateProgressStats(checked, total) {
+      document.getElementById('completedCount').innerText = checked;
+      document.getElementById('totalCount').innerText = total;
+      
+      const pct = total > 0 ? Math.round((checked / total) * 100) : 0;
+      document.getElementById('percentText').innerText = `${pct}% Completed`;
+      document.getElementById('progressBar').style.width = `${pct}%`;
+    }
+
+    // Accordion Toggle Logic
+    function toggleAccordion(bodyId) {
+      const body = document.getElementById(bodyId);
+      const icon = document.getElementById(bodyId.replace('-body', '-icon'));
+
+      if (body.classList.contains('hidden')) {
+        body.classList.remove('hidden');
+        icon.style.transform = 'rotate(0deg)';
+      } else {
+        body.classList.add('hidden');
+        icon.style.transform = 'rotate(-90deg)';
+      }
+    }
+
+    // Scroll to specific module
+    function scrollToModule(modId) {
+      const el = document.getElementById(modId);
+      if (el) {
+        const body = document.getElementById(`${modId}-body`);
+        const icon = document.getElementById(`${modId}-icon`);
+        if (body.classList.contains('hidden')) {
+          body.classList.remove('hidden');
+          icon.style.transform = 'rotate(0deg)';
+        }
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // Search and Filter Functionality
+    function filterTopics() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const diffFilter = document.getElementById('difficultyFilter').value;
+
+      document.querySelectorAll('.topic-card').forEach(card => {
+        const title = card.getAttribute('data-title');
+        const diff = card.getAttribute('data-diff');
+
+        const matchesSearch = title.includes(query);
+        const matchesDiff = diffFilter === 'ALL' || diff === diffFilter;
+
+        if (matchesSearch && matchesDiff) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Reset Progress
+    function resetProgress() {
+      if (confirm('Are you sure you want to reset all your learning progress?')) {
+        userProgress = {};
+        localStorage.removeItem('dsa_progress_2026');
+        renderSyllabus();
+        showToast('Progress reset successfully');
+      }
+    }
+
+    // Copy Email Toast Helper
+    function copyEmail() {
+      const email = "contact@dsamastery.dev";
+      navigator.clipboard.writeText(email).then(() => {
+        showToast("Email address copied to clipboard!");
+      }).catch(() => {
+        showToast("Email: contact@dsamastery.dev");
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMessage').innerText = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3000);
+    }
+
+    // Initial Execution
+    window.onload = function() {
+      renderSyllabus();
+    };
+  </script>
+</body>
+</html>
